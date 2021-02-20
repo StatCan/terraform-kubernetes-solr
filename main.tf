@@ -17,11 +17,25 @@ resource "null_resource" "dependency_getter" {
   }
 }
 
-resource "helm_release" "solr" {
+resource "null_resource" "zookeeper_operator" {
+  triggers = {
+    hash = filesha256("${path.module}/config/zk-operator.yaml")
+  }
+
+  provisioner "local-exec" {
+    command = "kubectl -n ${var.kubectl_namespace} apply -f ${"${path.module}/config/zk-operator.yaml"}"
+  }
+
+  depends_on = [
+    "null_resource.dependency_getter",
+  ]
+}
+
+resource "helm_release" "solr_operator" {
   depends_on = ["null_resource.dependency_getter"]
-  name       = "solr"
+  name       = "solr-operator"
   repository = "${var.helm_repository}"
-  chart      = "solr"
+  chart      = "solr-operator"
   version    = "${var.chart_version}"
   namespace  = "${var.helm_namespace}"
   timeout    = 1200
@@ -39,6 +53,7 @@ resource "null_resource" "dependency_setter" {
   # https://github.com/hashicorp/terraform/issues/1178#issuecomment-449158607
   # List resource(s) that will be constructed last within the module.
   depends_on = [
-    "helm_release.solr"
+    "null_resource.zookeeper_operator",
+    "helm_release.solr_operator"
   ]
 }

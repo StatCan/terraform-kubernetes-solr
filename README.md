@@ -1,8 +1,10 @@
-# Terraform Kubernetes Solr
+# Terraform Kubernetes Solr Operator
 
 ## Introduction
 
-This module deploys and configures Solr Cloud inside a Kubernetes Cluster.
+This module deploys and configures the Solr Operator inside a Kubernetes Cluster.
+
+* https://github.com/apache/lucene-solr-operator
 
 ## Security Controls
 
@@ -14,53 +16,14 @@ The following security controls can be met through configuration of this templat
 
 * None
 
-## Optional (depending on options configured):
+## Optional (depending on options configured)
 
 * None
 
 ## Usage
 
 ```terraform
-module "helm_solr" {
-  source = "github.com/canada-ca-terraform-modules/terraform-kubernetes-solr?ref=20191018.1"
 
-  chart_version = "0.1.0"
-  dependencies = [
-    "${module.namespace_default.depended_on}",
-  ]
-
-  helm_namespace = "solr"
-  helm_repository = "solr"
-
-  values = <<EOF
-image:
-  repository: solr
-  tag: 7.6.0
-  pullPolicy: IfNotPresent
-  # Add the secret name to pull from a private registry.
-  pullSecret:
-    - name: artifactory-prod
-
-podAnnotations:
-  sidecar.istio.io/inject: 'false'
-
-zookeeper:
-  podAnnotations:
-    sidecar.istio.io/inject: 'false'
-
-ingress:
-  enabled: true
-  annotations:
-    kubernetes.io/ingress.class: istio
-  hosts:
-    - solr.${var.ingress_domain}
-  tls:
-
-destinationRule:
-  enabled: true
-
-EOF
-}
 ```
 
 ## Variables Values
@@ -77,6 +40,4 @@ EOF
 
 | Date     | Release    | Change                                                     |
 | -------- | ---------- | ---------------------------------------------------------- |
-| 20190729 | 20190729.1 | Improvements to documentation and formatting               |
-| 20190909 | 20190909.1 | 1st release                                                |
-| 20200605 | v2.0.0     | Module now modified for Helm 3                             |
+| 20210220 | 20210220.1 | Initial release of Solr Operator                           |
