@@ -34,10 +34,14 @@ resource "null_resource" "zookeeper_operator" {
 resource "helm_release" "solr_operator" {
   depends_on = ["null_resource.dependency_getter"]
   name       = "solr-operator"
-  repository = "${var.helm_repository}"
+
+  repository = var.helm_repository
+  repository_username = var.helm_repository_username
+  repository_password = var.helm_repository_password
+
   chart      = "solr-operator"
-  version    = "${var.chart_version}"
-  namespace  = "${var.helm_namespace}"
+  version    = var.chart_version
+  namespace  = var.helm_namespace
   timeout    = 1200
 
   values = [
