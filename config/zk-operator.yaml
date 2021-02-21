@@ -54,7 +54,7 @@ spec:
       serviceAccountName: zookeeper-operator
       containers:
         - name: zk-operator
-          image: pravega/zookeeper-operator:0.2.6
+          image: pravega/zookeeper-operator:0.2.9
           ports:
           - containerPort: 60000
             name: metrics
