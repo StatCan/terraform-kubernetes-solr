@@ -18,3 +18,5 @@ variable "values" {
   default = ""
   type    = "string"
 }
+
+variable "kubectl_namespace" {}
