@@ -1,22 +1,17 @@
 variable "helm_namespace" {}
 
-variable "helm_repository" {}
+variable "helm_repository" {
+  default = "https://solr.apache.org/charts"
+}
+
 variable "helm_repository_password" {
   default = ""
 }
+
 variable "helm_repository_username" {
   default = ""
 }
 
-variable "chart_version" {}
-
-variable "dependencies" {
-  type = "list"
+variable "chart_version" {
+  default = "0.3.0"
 }
-
-variable "values" {
-  default = ""
-  type    = "string"
-}
-
-variable "kubectl_namespace" {}
