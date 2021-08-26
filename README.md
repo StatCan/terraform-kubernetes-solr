@@ -14,7 +14,7 @@ The following security controls can be met through configuration of this templat
 
 ## Dependencies
 
-* None
+* Terraform 0.13
 
 ## Optional (depending on options configured)
 
@@ -28,16 +28,16 @@ The following security controls can be met through configuration of this templat
 
 ## Variables Values
 
-| Name                 | Type   | Required | Value                                               |
-| -------------------- | ------ | -------- | --------------------------------------------------- |
-| chart_version        | string | yes      | Version of the Helm Chart                           |
-| dependencies         | string | yes      | Dependency name refering to namespace module        |
-| helm_namespace       | string | yes      | The namespace Helm will install the chart under     |
-| helm_repository      | string | yes      | The repository where the Helm chart is stored       |
-| values               | list   | no       | Values to be passed to the Helm Chart               |
+| Name            | Type   | Required | Value                                           |
+| --------------- | ------ | -------- | ----------------------------------------------- |
+| chart_version   | string | yes      | Version of the Helm Chart                       |
+| helm_namespace  | string | yes      | The namespace Helm will install the chart under |
+| helm_repository | string | yes      | The repository where the Helm chart is stored   |
+| values          | list   | no       | Values to be passed to the Helm Chart           |
 
 ## History
 
-| Date     | Release    | Change                                                     |
-| -------- | ---------- | ---------------------------------------------------------- |
-| 20210220 | 20210220.1 | Initial release of Solr Operator                           |
+| Date     | Release    | Change                           |
+| -------- | ---------- | -------------------------------- |
+| 20210220 | 20210220.1 | Initial release of Solr Operator |
+| 20210826 | v3.0.0     | Update module for Terraform 0.13 |
