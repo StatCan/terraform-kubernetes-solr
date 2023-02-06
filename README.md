@@ -56,5 +56,6 @@ No Modules.
 
 | Date     | Release | Change                                 |
 | -------- | ------- | -------------------------------------- |
+| 20230203 | v4.0.1  | Specify sensitive variables            |
 | 20220908 | v4.0.0  | Align with upstream helm chart changes |
 | 20210826 | v3.0.0  | Update module for Terraform 0.13       |
